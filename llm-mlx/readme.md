@@ -119,14 +119,6 @@ cd llm-mlx
 
 ```
 
-**One-shot from HuggingFace** (download + convert + 4-bit in one step):
-
-```bash
-python -m mlx_lm convert \
-  --hf-path Qwen/Qwen2.5-7B-Instruct \
-  --mlx-path ./qwen-q4 \
-  -q --q-bits 4
-```
 
 Expected model size:
 ~4–5GB
@@ -194,15 +186,7 @@ llama-mlx/
 └── .venv/
 ```
 
----
 
-# Optional: One-Command Script
-
-```bash
-mlx_lm.convert --hf-path meta-llama/Meta-Llama-3.1-8B-Instruct --mlx-path ./model && \
-mlx_lm.quantize --model ./model --quantized-path ./model-q4 --bits 4 && \
-mlx_lm.chat --model ./model-q4
-```
 
 ---
 
@@ -213,3 +197,15 @@ mlx_lm.chat --model ./model-q4
 * Larger models (14B+) are not recommended on 16GB.
 
 
+
+
+## Download embedding model
+
+```bash
+
+uv pip install huggingface_hub
+
+hf download sentence-transformers/all-MiniLM-L6-v2 --local-dir ./qwen-embed-q4
+
+
+```

@@ -212,3 +212,4 @@ qwen-q4/
 llama3.1-mlx/
 llama3.1-q4/
 .DS_Store
+qwen-embed-q4/
