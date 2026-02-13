@@ -1,2 +1,13 @@
-# local_agentic_stack
-Agentic repo with local llm, MCP and RAG
+# Start local
+
+# Install uv (if not installed)
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+# start local
+
+```bash
+
+```

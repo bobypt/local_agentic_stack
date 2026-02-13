@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+secrets.md
+
+qwen-mlx/
+qwen-q4/
+llama3.1-mlx/
+llama3.1-q4/
+.DS_Store
