@@ -104,28 +104,28 @@ This will:
 
 # 6. Quantize (Recommended for 16GB)
 
-Use 4-bit quantization:
+Use 4-bit quantization with `mlx_lm convert` and `-q`:
+
+**From existing MLX model** (e.g. after step 5):
 
 ```bash
-export PATH="$PWD/.venv/bin:$PATH"
+cd llm-mlx
+source .venv/bin/activate
 
-mlx_lm.gptq \
-  --model ./llama3.1-mlx \
-  --quantized-path ./llama3.1-q4 \
-  --bits 4
+cd llm-mlx
+   source .venv/bin/activate
+   python -m mlx_lm convert --hf-path ./qwen-mlx --mlx-path ./qwen-q4 -q --q-bits 4
 
-mlx_lm.gptq \
-  --model ./qwen-mlx \
+
+```
+
+**One-shot from HuggingFace** (download + convert + 4-bit in one step):
+
+```bash
+python -m mlx_lm convert \
+  --hf-path Qwen/Qwen2.5-7B-Instruct \
   --mlx-path ./qwen-q4 \
-  --bits 4
-  --group-size 64
-
-
-mlx_lm.convert \
-  --hf-path   ./qwen-mlx 
-  --mlx-path ./qwen-q4 \
-  --quantize \ 
-  --q-bits 4
+  -q --q-bits 4
 ```
 
 Expected model size:
