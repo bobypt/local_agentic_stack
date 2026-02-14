@@ -1,4 +1,4 @@
-.PHONY: install llm-convert llm-quantize llm-run web api dev clean
+.PHONY: install llm-convert llm-quantize llm-run web api dev vectorise-data start-mcp-server clean
 
 LLM_DIR := llm-mlx
 CONVERT_SENTINEL := $(LLM_DIR)/qwen-mlx/.done
@@ -30,14 +30,20 @@ llm-run: llm-quantize
 		--model ./qwen-q4 \
 		--port 8001
 
+# -------- VECTORISE DATA (MCP ingest) --------
+vectorise-data:
+	cd mcp && (test -d .venv || uv venv) && . .venv/bin/activate && \
+	uv pip install fastapi uvicorn chromadb sentence-transformers python-dotenv numpy && \
+	uv run python ingest.py
+
 # -------- WEB --------
 web:
 	cd web && npm run dev
 
-# -------- API --------
-api:
-	cd api && npm run dev
+# -------- MCP server (RAG) --------
+start-mcp-server: vectorise-data
+	cd mcp && . .venv/bin/activate && uv run uvicorn main:app --reload
 
 # -------- FULL DEV --------
 dev:
-	make -j3 llm-run web api
+	make -j3 llm-run start-mcp-server

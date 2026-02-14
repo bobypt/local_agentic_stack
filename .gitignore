@@ -213,3 +213,6 @@ llama3.1-mlx/
 llama3.1-q4/
 .DS_Store
 qwen-embed-q4/
+mcp/chroma_db/chroma.sqlite3
+mcp/embeddings_cache/grocery-products.npy
+**/chroma_db/**
